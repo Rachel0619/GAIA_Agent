@@ -30,7 +30,6 @@ agent_submission_agent = CodeAgent(
     model=model,
     tools=[answer_question, web_search, visit_webpage],
     managed_agents=[],
-    class='CodeAgent',
     max_steps=5,
     verbosity_level=1,
     grammar=None,
