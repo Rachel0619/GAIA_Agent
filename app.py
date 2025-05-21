@@ -10,11 +10,8 @@ from tools.web_search import DuckDuckGoSearchTool as WebSearch
 from tools.visit_webpage import VisitWebpageTool as VisitWebpage
 from tools.final_answer import FinalAnswerTool as FinalAnswer
 
-
-
 model = InferenceClientModel(
-model_name='Qwen/Qwen2.5-Coder-32B-Instruct',
-model_id='Qwen/Qwen2.5-Coder-32B-Instruct',
+    model_id='Qwen/Qwen2.5-Coder-32B-Instruct',
 )
 
 answer_question = AnswerQuestion()
