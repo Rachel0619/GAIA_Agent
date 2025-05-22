@@ -38,7 +38,7 @@ final_answer = FinalAnswer()
 
 model = InferenceClientModel(
     model_id='Qwen/Qwen2.5-Coder-32B-Instruct',
-    max_new_tokens=1000,
+    max_tokens=1000,
 )
 
 with open(os.path.join(CURRENT_DIR, "prompts.yaml"), 'r') as stream:
