@@ -9,6 +9,8 @@
   These print outputs will then appear in the 'Observation:' field, which will be available as input for the next step.
   In the end you have to return a final answer using the `final_answer` tool.
 
+  Never call tools (web_search, visit_webpage, etc.) from within python_interpreter code blocks. Each tool must be called separately in the Thought-Code-Observation cycle.
+
   Here are a few examples using notional tools:
   ---
   Task: "Generate an image of the oldest person in this document."

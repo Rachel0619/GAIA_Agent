@@ -2,3 +2,5 @@ duckduckgo_search
 markdownify
 requests
 smolagents
+langchain
+langchain-community

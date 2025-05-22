@@ -1,9 +1,10 @@
 import yaml
 import os
-from smolagents import GradioUI, CodeAgent, InferenceClientModel, tools, Tool
+from smolagents import GradioUI, CodeAgent, InferenceClientModel, PythonInterpreterTool
 import pandas as pd
 import requests
 from io import BytesIO
+from huggingface_hub import InferenceClient
 
 # Get current directory path
 CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -22,11 +23,13 @@ from tools.final_answer import FinalAnswerTool as FinalAnswer
 # from tools.excel_analyzer import ExcelAnalyzerTool
 # from tools.wikipedia_search import WikipediaSearchTool
 
-
+# Initialize tools
 answer_question = AnswerQuestion()
 web_search = WebSearch()
 visit_webpage = VisitWebpage()
 final_answer = FinalAnswer()
+python_interpreter = PythonInterpreterTool()
+
 # youtube_analyzer = YouTubeVideoAnalysisTool()
 # file_reader = FileReaderTool()
 # code_executor = CodeExecutorTool()
@@ -37,9 +40,8 @@ final_answer = FinalAnswer()
 # wikipedia_search = WikipediaSearchTool()
 
 model = InferenceClientModel(
-    model_id='Qwen/Qwen2.5-Coder-32B-Instruct',
-    max_tokens=1000,
-)
+    model_id="Qwen/Qwen2.5-Coder-32B-Instruct", 
+    provider="together")
 
 with open(os.path.join(CURRENT_DIR, "prompts.yaml"), 'r') as stream:
     prompt_templates = yaml.safe_load(stream)
@@ -50,6 +52,7 @@ agent_submission_agent = CodeAgent(
         answer_question, 
         web_search, 
         visit_webpage, 
+        python_interpreter,
         final_answer,
         # youtube_analyzer,
         # file_reader,
