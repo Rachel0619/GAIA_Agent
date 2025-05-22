@@ -13,28 +13,28 @@ from tools.web_search import DuckDuckGoSearchTool as WebSearch
 from tools.visit_webpage import VisitWebpageTool as VisitWebpage
 from tools.final_answer import FinalAnswerTool as FinalAnswer
 
-from tools.youtube_video_analysis import YouTubeVideoAnalysisTool
-from tools.file_reader import FileReaderTool
-from tools.code_executor import CodeExecutorTool
-from tools.image_analyzer import ImageAnalyzerTool
-from tools.chess_analyzer import ChessAnlyzerTool
-from tools.audio_transcriber import AudioTranscriberTool
-from tools.excel_analyzer import ExcelAnalyzerTool
-from tools.wikipedia_search import WikipediaSearchTool
+# from tools.youtube_video_analysis import YouTubeVideoAnalysisTool
+# from tools.file_reader import FileReaderTool
+# from tools.code_executor import CodeExecutorTool
+# from tools.image_analyzer import ImageAnalyzerTool
+# from tools.chess_analyzer import ChessAnlyzerTool
+# from tools.audio_transcriber import AudioTranscriberTool
+# from tools.excel_analyzer import ExcelAnalyzerTool
+# from tools.wikipedia_search import WikipediaSearchTool
 
 
 answer_question = AnswerQuestion()
 web_search = WebSearch()
 visit_webpage = VisitWebpage()
 final_answer = FinalAnswer()
-youtube_analyzer = YouTubeVideoAnalysisTool()
-file_reader = FileReaderTool()
-code_executor = CodeExecutorTool()
-image_analyzer = ImageAnalyzerTool()
-chess_analyzer = ChessAnalyzerTool()
-audio_transcriber = AudioTranscriberTool()
-excel_analyzer = ExcelAnalyzerTool()
-wikipedia_search = WikipediaSearchTool()
+# youtube_analyzer = YouTubeVideoAnalysisTool()
+# file_reader = FileReaderTool()
+# code_executor = CodeExecutorTool()
+# image_analyzer = ImageAnalyzerTool()
+# chess_analyzer = ChessAnalyzerTool()
+# audio_transcriber = AudioTranscriberTool()
+# excel_analyzer = ExcelAnalyzerTool()
+# wikipedia_search = WikipediaSearchTool()
 
 model = InferenceClientModel(
     model_id='Qwen/Qwen2.5-Coder-32B-Instruct',
@@ -51,14 +51,14 @@ agent_submission_agent = CodeAgent(
         web_search, 
         visit_webpage, 
         final_answer,
-        youtube_analyzer,
-        file_reader,
-        code_executor,
-        image_analyzer,
-        chess_analyzer,
-        audio_transcriber,
-        excel_analyzer,
-        wikipedia_search
+        # youtube_analyzer,
+        # file_reader,
+        # code_executor,
+        # image_analyzer,
+        # chess_analyzer,
+        # audio_transcriber,
+        # excel_analyzer,
+        # wikipedia_search
     ],
     managed_agents=[],
     max_steps=10,  # Increase steps as some questions need multiple tools
