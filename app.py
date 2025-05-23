@@ -23,13 +23,6 @@ from tools.final_answer import FinalAnswerTool as FinalAnswer
 # from tools.excel_analyzer import ExcelAnalyzerTool
 # from tools.wikipedia_search import WikipediaSearchTool
 
-# Initialize tools
-answer_question = AnswerQuestion()
-web_search = WebSearch()
-visit_webpage = VisitWebpage()
-final_answer = FinalAnswer()
-python_interpreter = PythonInterpreterTool()
-
 # youtube_analyzer = YouTubeVideoAnalysisTool()
 # file_reader = FileReaderTool()
 # code_executor = CodeExecutorTool()
@@ -39,42 +32,54 @@ python_interpreter = PythonInterpreterTool()
 # excel_analyzer = ExcelAnalyzerTool()
 # wikipedia_search = WikipediaSearchTool()
 
-model = InferenceClientModel(
-    model_id="Qwen/Qwen2.5-Coder-32B-Instruct", 
-    provider="together")
+class GAIAAgent:
+    def __init__(self):
+        # Get current directory path
+        CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
+        
+        # Initialize your model and tools (same as before)
+        model = InferenceClientModel(
+            model_id="Qwen/Qwen2.5-Coder-32B-Instruct", 
+            provider="together"
+        )
+        
+        with open(os.path.join(CURRENT_DIR, "prompts.yaml"), 'r') as stream:
+            prompt_templates = yaml.safe_load(stream)
+        
+        # Initialize tools
+        answer_question = AnswerQuestion()
+        web_search = WebSearch()
+        visit_webpage = VisitWebpage()
+        final_answer = FinalAnswer()
+        python_interpreter = PythonInterpreterTool()
+        
+        self.agent = CodeAgent(
+            model=model,
+            tools=[
+                answer_question, 
+                web_search, 
+                visit_webpage, 
+                python_interpreter,
+                final_answer,
+            ],
+            managed_agents=[],
+            max_steps=10,
+            verbosity_level=1,
+            grammar=None,
+            planning_interval=None,
+            name='gaia_agent',
+            description='Agent for answering GAIA evaluation questions',
+            executor_type='local',
+            executor_kwargs={},
+            max_print_outputs_length=None,
+            prompt_templates=prompt_templates
+        )
+    
+    def run(self, question: str) -> str:
+        return self.agent.run(question)
 
-with open(os.path.join(CURRENT_DIR, "prompts.yaml"), 'r') as stream:
-    prompt_templates = yaml.safe_load(stream)
-
-agent = CodeAgent(
-    model=model,
-    tools=[
-        answer_question, 
-        web_search, 
-        visit_webpage, 
-        python_interpreter,
-        final_answer,
-        # youtube_analyzer,
-        # file_reader,
-        # code_executor,
-        # image_analyzer,
-        # chess_analyzer,
-        # audio_transcriber,
-        # excel_analyzer,
-        # wikipedia_search
-    ],
-    managed_agents=[],
-    max_steps=10,  # Increase steps as some questions need multiple tools
-    verbosity_level=1,
-    grammar=None,
-    planning_interval=None,
-    name='submission_agent',
-    description='Agent for answering GAIA evaluation questions',
-    executor_type='local',
-    executor_kwargs={},
-    max_print_outputs_length=None,
-    prompt_templates=prompt_templates
-)
+# Create an instance for hub loading
+agent = GAIAAgent()
 
 if __name__ == "__main__":
-    GradioUI(agent).launch()
+    GradioUI(agent.agent).launch()
