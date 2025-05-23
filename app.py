@@ -46,7 +46,7 @@ model = InferenceClientModel(
 with open(os.path.join(CURRENT_DIR, "prompts.yaml"), 'r') as stream:
     prompt_templates = yaml.safe_load(stream)
 
-agent_submission_agent = CodeAgent(
+agent = CodeAgent(
     model=model,
     tools=[
         answer_question, 
@@ -77,4 +77,4 @@ agent_submission_agent = CodeAgent(
 )
 
 if __name__ == "__main__":
-    GradioUI(agent_submission_agent).launch()
+    GradioUI(agent).launch()
