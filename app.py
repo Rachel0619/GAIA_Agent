@@ -40,7 +40,8 @@ class GAIAAgent:
         # Initialize your model and tools (same as before)
         model = InferenceClientModel(
             model_id="Qwen/Qwen2.5-Coder-32B-Instruct", 
-            provider="together"
+            provider="together",
+            token=os.getenv("HF_TOKEN")
         )
         
         with open(os.path.join(CURRENT_DIR, "prompts.yaml"), 'r') as stream:
