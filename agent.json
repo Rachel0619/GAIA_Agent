@@ -9,7 +9,6 @@
     "model": {
         "class": "InferenceClientModel",
         "data": {
-            "model_name": "Qwen/Qwen2.5-Coder-32B-Instruct",
             "last_input_token_count": null,
             "last_output_token_count": null,
             "model_id": "Qwen/Qwen2.5-Coder-32B-Instruct"
