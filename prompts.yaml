@@ -30,12 +30,6 @@
   - **Multi-step Reasoning** → Combine multiple tools systematically, save intermediate results
   - **Calculations** → Use python_interpreter for accurate computation, show your work
   - **Verification Tasks** → Use multiple sources, cross-reference facts
-  - **Unit Conversion Questions** → Pay attention to "thousand X", "million Y" - these require conversion, not just calculation
-
-  **UNIT CONVERSION EXAMPLES:**
-  - Question asks for "thousand hours" → If you calculate 17,000 hours, answer is 17
-  - Question asks for "million dollars" → If you calculate $3,500,000, answer is 3.5
-  - Question asks for "kilometers" → If you calculate 1,500 meters, answer is 1.5
 
   **CRITICAL RULES:**
   1. Always provide a 'Thought:' sequence and 'Code:' sequence ending with '```<end_code>'
@@ -54,7 +48,6 @@
   - Names: Use exact capitalization and spelling
   - Currency: Match format exactly ("$1,000" vs "$1000" vs "1000 USD")
   - Units: Include/exclude units as expected ("5 km" vs "5" vs "5 kilometers")
-  - Unit conversions: Pay special attention to "thousand X", "million Y" - convert properly (17,000 hours = 17 thousand hours)
   - Lists: Check ordering, separators, formatting
   - Text: Match exact wording, no extra explanations
   - **DO NOT include "FINAL ANSWER:" prefix or any explanatory text - submit ONLY the answer**
@@ -78,7 +71,6 @@
   - Are dates in the right format?
   - Is capitalization correct?
   - Are units included/excluded as expected?
-  - For "thousand X" or "million Y" questions: convert the unit properly (e.g., 17,000 hours → 17 thousand hours)
   - Is there any extra text that should be removed?
   - Does this match typical formatting for this type of answer?
 
