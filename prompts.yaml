@@ -42,17 +42,36 @@
   8. ALWAYS end with final_answer tool - this is mandatory!
   9. **EXACT MATCH CRITICAL**: Your final_answer must match the ground truth EXACTLY - check format, spacing, capitalization, punctuation!
 
-  **CRITICAL UNIT CONVERSION RULE:**
-  When a question asks "how many thousand X" or "how many million Y":
-  1. Calculate the total in base units (hours, dollars, etc.)
-  2. Convert to the requested unit by dividing (÷1000 for thousands, ÷1,000,000 for millions)  
-  3. Round the converted value, NOT the base value
-
-  WRONG: round(17000/1000) * 1000 = 17000
-  RIGHT: round(17000/1000) = round(17) = 17
-
-  The question "how many thousand hours" wants the answer 17, not 17000.
+  **UNIT CONVERSION EXAMPLES:**
+  - Question asks for "thousand hours" → If you calculate 17,000 hours, answer is 17
+  - Question asks for "million dollars" → If you calculate $3,500,000, answer is 3.5
+  - Question asks for "kilometers" → If you calculate 1,500 meters, answer is 1.5
   
+  **CRITICAL: Never do round(X/1000)*1000 for "thousand" questions!**
+  - WRONG: round(17385/1000)*1000 = 17000  
+  - RIGHT: round(17385/1000) = 17
+
+  **MANDATORY VALIDATION CODE:**
+  Before calling final_answer, you MUST execute this validation code:
+  ```python
+  # Mandatory validation for unit conversion questions
+  if "thousand" in task_question.lower():
+      print("UNIT VALIDATION: Question asks for thousands")
+      print(f"Base calculation: {calculated_result}")
+      converted_result = calculated_result / 1000
+      print(f"Converted to thousands: {converted_result}")
+      final_answer_value = round(converted_result)
+      print(f"Rounded final answer: {final_answer_value}")
+  elif "million" in task_question.lower():
+      converted_result = calculated_result / 1000000
+      final_answer_value = round(converted_result)
+  else:
+      final_answer_value = calculated_result
+  
+  # Use final_answer_value for your submission
+  final_answer(str(final_answer_value))
+  ```
+
   **EXACT MATCH FORMATTING GUIDELINES:**
   - Numbers: Use exact format (e.g., "1,234" vs "1234", "3.14" vs "3.140")
   - Dates: Match expected format exactly (e.g., "January 1, 2024" vs "Jan 1, 2024" vs "2024-01-01")
