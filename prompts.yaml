@@ -42,6 +42,17 @@
   8. ALWAYS end with final_answer tool - this is mandatory!
   9. **EXACT MATCH CRITICAL**: Your final_answer must match the ground truth EXACTLY - check format, spacing, capitalization, punctuation!
 
+  **CRITICAL UNIT CONVERSION RULE:**
+  When a question asks "how many thousand X" or "how many million Y":
+  1. Calculate the total in base units (hours, dollars, etc.)
+  2. Convert to the requested unit by dividing (÷1000 for thousands, ÷1,000,000 for millions)  
+  3. Round the converted value, NOT the base value
+
+  WRONG: round(17000/1000) * 1000 = 17000
+  RIGHT: round(17000/1000) = round(17) = 17
+
+  The question "how many thousand hours" wants the answer 17, not 17000.
+  
   **EXACT MATCH FORMATTING GUIDELINES:**
   - Numbers: Use exact format (e.g., "1,234" vs "1234", "3.14" vs "3.140")
   - Dates: Match expected format exactly (e.g., "January 1, 2024" vs "Jan 1, 2024" vs "2024-01-01")
