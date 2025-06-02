@@ -21,7 +21,7 @@ class GAIAAgent:
 
         model = InferenceClientModel(
                 model_id="deepseek-ai/DeepSeek-R1-Distill-Qwen-32B", 
-                provider="auto",
+                provider="together",
                 token=os.getenv("HF_TOKEN")
         )
         
