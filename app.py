@@ -20,9 +20,9 @@ class GAIAAgent:
         CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
 
         model = InferenceClientModel(
-            model_id="Qwen/Qwen2.5-Coder-32B-Instruct", 
-            provider="together",
-            token=os.getenv("HF_TOKEN")
+                model_id="anthropic/claude-3.5-sonnet-20241022", 
+                provider="anthropic",
+                token=os.getenv("ANTHROPIC_API_KEY")
         )
         
         with open(os.path.join(CURRENT_DIR, "prompts.yaml"), 'r') as stream:
