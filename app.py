@@ -20,8 +20,8 @@ class GAIAAgent:
         CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
 
         model = InferenceClientModel(
-                model_id="deepseek-ai/DeepSeek-R1", 
-                provider="hyperbolic",
+                model_id="Qwen/Qwen2.5-Coder-32B-Instruct", 
+                provider="together",
                 token=os.getenv("HF_TOKEN")
         )
         
